@@ -6,6 +6,7 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=25&offset=25")
             addPokemon(item.name);
         });
     });
+//could use promiseAll to fetch all the img info at the same time
 
 const addPokemon = async (name) => {
     // fetch image for pokemon
@@ -28,3 +29,5 @@ const addPokemon = async (name) => {
     </div>`
     );
 };
+
+// types under the name
