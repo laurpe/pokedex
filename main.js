@@ -1,33 +1,60 @@
-// fetch pokemon names and create grid
-fetch("https://pokeapi.co/api/v2/pokemon?limit=25&offset=25")
-    .then((response) => response.json())
-    .then((data) => {
-        data.results.forEach((item) => {
-            addPokemon(item.name);
-        });
-    });
-//could use promiseAll to fetch all the img info at the same time
+const grid = document.querySelector("#grid");
 
-const addPokemon = async (name) => {
-    // fetch image for pokemon
-    let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+// fetch pokemon names and create grid
+
+const fetchData = () => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=25&offset=0")
         .then((response) => response.json())
         .then((data) => {
-            return data.sprites.other.dream_world.front_default;
+            // const fetches = data.results.map((item) => {
+            //     return fetch(item.url).then((response) => response.json());
+            // });
+            // Promise.all(fetches).then((response) => {
+            //     console.log("promise all result", response);
+            //     console.log(response[0].types);
+            // });
+            let names = [];
+            data.results.forEach((name) => names.push(name));
+
+            data.results.forEach((item) => {
+                addPokemon(item.name);
+            });
         });
+};
+fetchData();
+
+const addPokemon = async (name) => {
+    // fetch data for pokemon
+    let data = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        .then((response) => response.json())
+        .then((data) => {
+            return data;
+        });
+
+    let types = data.types.map((item) => item.type.name).join(", ");
+
     // create grid
-    const grid = document.querySelector("#grid");
+
     grid.insertAdjacentHTML(
         "beforeend",
         `<div class="card">
         <div class="img">
-            <img src="${url}" alt="pokemon" />
+            <img src="${data.sprites.other.dream_world.front_default}" alt="${name}" />
         </div>
         <div class="title">
-            ${name}
+            ${name} (${types})
         </div>
     </div>`
     );
 };
 
-// types under the name
+const input = document.querySelector("#search");
+const form = document.querySelector("#search-form");
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+});
+
+input.addEventListener("keyup", () => {
+    console.log(input.value);
+});
