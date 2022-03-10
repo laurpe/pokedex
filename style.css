@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+
+:root {
+    --color-primary: rgb(100, 136, 255);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Work Sans", sans-serif;
+    background-image: url("http://source.unsplash.com/ms7GRs97bIs");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+}
+
+h1 {
+    color: var(--color-primary);
+    text-align: center;
+    padding: 50px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 50px;
+    grid-auto-rows: 300px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: filter 1s, box-shadow 0.5s, transform 0.5s;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.card {
+    filter: grayscale(80%);
+}
+
+.card:hover {
+    filter: none;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+    transform: scale(101%);
+    transform: rotate(-1deg);
+}
+
+.title {
+    background-color: var(--color-primary);
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    border-radius: 0 0 5px 5px;
+}
+
+img {
+    max-width: 100%;
+    object-fit: cover;
+}
