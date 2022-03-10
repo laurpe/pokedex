@@ -7,17 +7,14 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=25&offset=25")
         });
     });
 
-// fetch image link for pokemon
-const getImageUrl = async (name) => {
-    return await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+const addPokemon = async (name) => {
+    // fetch image for pokemon
+    let url = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data.sprites.other.dream_world.front_default);
+            return data.sprites.other.dream_world.front_default;
         });
-};
-
-const addPokemon = (name) => {
-    let url = "";
+    // create grid
     const grid = document.querySelector("#grid");
     grid.insertAdjacentHTML(
         "beforeend",
