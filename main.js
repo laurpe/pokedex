@@ -1,7 +1,5 @@
 const grid = document.querySelector("#grid");
 
-// fetch pokemon names and create grid
-
 const fetchData = () => {
     fetch("https://pokeapi.co/api/v2/pokemon?limit=25&offset=0")
         .then((response) => response.json())
@@ -13,8 +11,15 @@ const fetchData = () => {
             //     console.log("promise all result", response);
             //     console.log(response[0].types);
             // });
-            let names = [];
-            data.results.forEach((name) => names.push(name));
+
+            input.addEventListener("keyup", () => {
+                grid.innerHTML = "";
+                data.results.forEach((item) => {
+                    if (item.name.includes(input.value)) {
+                        addPokemon(item.name);
+                    }
+                });
+            });
 
             data.results.forEach((item) => {
                 addPokemon(item.name);
@@ -53,8 +58,4 @@ const form = document.querySelector("#search-form");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-});
-
-input.addEventListener("keyup", () => {
-    console.log(input.value);
 });
