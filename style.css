@@ -1,8 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
 :root {
     --color-primary: rgb(100, 136, 255);
     --color-text: rgb(31, 43, 83);
+    --color-fire: rgb(255, 168, 96);
+    --color-water: rgb(144, 192, 231);
+    --color-grass: rgb(70, 173, 105);
+    --color-electric: rgb(255, 255, 93);
+    --color-bug: rgb(189, 236, 114);
+    --color-normal: rgb(241, 235, 235);
+    --color-poison: rgb(204, 135, 204);
 }
 
 * {
@@ -25,6 +34,8 @@ h1 {
     color: var(--color-text);
     text-align: center;
     padding: 50px;
+    font-family: "Bungee", cursive;
+    font-size: 3.5rem;
 }
 
 .grid {
@@ -56,6 +67,33 @@ h1 {
 
 .card {
     filter: grayscale(90%);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover > .bg-fill {
+    content: "";
+    position: absolute;
+    top: -250px;
+    left: -273px;
+    animation-name: size;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    /* animation-timing-function: cubic-bezier(0.11, 0.76, 0.7, 1.2); */
+    border-radius: 50%;
+}
+
+@keyframes size {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 800px;
+        height: 800px;
+        opacity: 1;
+    }
 }
 
 .card:hover {
@@ -75,10 +113,12 @@ h1 {
     color: white;
     border-radius: 0 0 5px 5px;
     text-transform: capitalize;
+    z-index: 1;
 }
 
 .img {
     margin: auto;
+    z-index: 1;
 }
 
 .card img {
@@ -95,5 +135,33 @@ input {
     font-size: inherit;
     padding: 10px;
     border-radius: 5px;
-    width: 350px;
+    width: 18rem;
+}
+
+.card.fire > .bg-fill {
+    background-color: var(--color-fire);
+}
+
+.card.water > .bg-fill {
+    background-color: var(--color-water);
+}
+
+.card.grass > .bg-fill {
+    background-color: var(--color-grass);
+}
+
+.card.electric > .bg-fill {
+    background-color: var(--color-electric);
+}
+
+.card.bug > .bg-fill {
+    background-color: var(--color-bug);
+}
+
+.card.normal > .bg-fill {
+    background-color: var(--color-normal);
+}
+
+.card.poison > .bg-fill {
+    background-color: var(--color-poison);
 }

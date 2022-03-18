@@ -18,18 +18,20 @@ const fetchData = () => {
 fetchData();
 
 const createGrid = async (data) => {
+    console.log(data);
     data.forEach((item) => {
         let types = item.types.map((item) => item.type.name).join(", ");
         grid.insertAdjacentHTML(
             "beforeend",
-            `<div class="card">
-            <div class="img">
-                <img src="${item.sprites.other.dream_world.front_default}" alt="${item.name}" />
-            </div>
-            <div class="title">
-                ${item.name} (${types})
-            </div>
-        </div>`
+            `<div class="card ${item.types[0].type.name}">
+            <div class="bg-fill"></div>
+                <div class="img">
+                    <img src="${item.sprites.other.dream_world.front_default}" alt="${item.name}" />
+                </div>
+                <div class="title">
+                    ${item.name} (${types})
+                </div>
+            </div>`
         );
     });
 };
